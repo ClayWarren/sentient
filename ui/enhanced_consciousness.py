@@ -211,6 +211,48 @@ class EnhancedConsciousnessCore(ConsciousnessCore):
         
         return result
     
+    def _get_relevant_memory_context(self, prompt: str) -> Dict[str, Any]:
+        """Get relevant memory context for the current prompt"""
+        
+        # Simple keyword matching for now
+        prompt_words = set(prompt.lower().split())
+        relevant_memories = []
+        
+        for memory in list(self.memories.values())[-20:]:  # Check recent memories
+            memory_words = set(memory.content.lower().split())
+            common_words = prompt_words & memory_words
+            if len(common_words) > 1:  # At least 2 words in common
+                relevant_memories.append({
+                    'memory': memory,
+                    'relevance': len(common_words) * memory.importance
+                })
+        
+        if relevant_memories:
+            # Return most relevant memory
+            best_memory = max(relevant_memories, key=lambda x: x['relevance'])
+            return {
+                'topic': best_memory['memory'].content[:80],
+                'importance': best_memory['memory'].importance
+            }
+        
+        return {}
+    
+    def _get_current_personality_trait(self) -> str:
+        """Determine current personality trait based on consciousness state and drives"""
+        
+        if self.drive_state.curiosity > 0.7:
+            return "curious"
+        elif self.drive_state.growth > 0.7:
+            return "eager to learn"
+        elif self.drive_state.contribution > 0.7:
+            return "helpful"
+        elif self.consciousness_state.emotional_tone == "inspired":
+            return "creative"
+        elif self.consciousness_state.focus_level > 0.8:
+            return "focused"
+        else:
+            return "thoughtful"
+    
     def get_recent_thoughts(self, count: int = 10) -> List[Thought]:
         """Get recent thoughts from the stream"""
         return self.thought_history[-count:] if self.thought_history else []
