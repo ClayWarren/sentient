@@ -4,7 +4,7 @@
 
 ### **Core System (3 files)**
 1. **`consciousness_core.py`** - Main consciousness-enhanced nanoGPT implementation
-2. **`README_CLEAN.md`** - Clean documentation
+2. **`README.md`** - Main documentation
 3. **`LAUNCH_README.md`** - This file (launch instructions)
 
 ### **Optional Research Files** 
@@ -38,7 +38,7 @@
 
 ### **Documentation Files (Consolidate)**
 - Keep: `LAUNCH_README.md` (this file)
-- Keep: `README_CLEAN.md` (main docs)
+- Keep: `README.md` (main docs)
 - Archive: All other markdown files as research
 
 ### **Data/Results Files (Archive)**
@@ -61,7 +61,7 @@ python3 consciousness_core.py
 ```
 nanoGPT/
 ├── consciousness_core.py      # Main consciousness system
-├── README_CLEAN.md           # Primary documentation  
+├── README.md                 # Primary documentation  
 ├── model.py                  # Original nanoGPT model
 ├── train.py                  # Original training script
 ├── LICENSE                   # License file
