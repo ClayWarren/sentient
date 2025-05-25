@@ -26,6 +26,17 @@ from asi_capabilities import (
 )
 from persistence import ConsciousnessPersistence
 from interactive_conversation import start_conversation_interface
+from chain_of_thought import ChainOfThoughtReasoner, integrate_chain_of_thought
+from function_calling import FunctionCallingSystem, integrate_function_calling
+from mathematical_reasoning import MathematicalReasoner, integrate_mathematical_reasoning
+from code_generation import CodeGenerator, integrate_code_generation
+from multilingual_support import MultilingualProcessor, integrate_multilingual_support
+from few_shot_learning import FewShotLearner, integrate_few_shot_learning
+from constitutional_ai import ConstitutionalAI, integrate_constitutional_ai
+from swe_bench import SWEBenchSolver, integrate_swe_bench
+from gpqa_diamond import GPQADiamondSolver, integrate_gpqa_diamond
+from aime_2025 import AIME2025Solver, integrate_aime_2025
+from arc_agi_2 import ARCAGI2Solver, integrate_arc_agi_2
 
 
 class EnhancedWorkingMemory:
@@ -967,6 +978,179 @@ First thought:"""
             entropy=1.0,
             significance=0.5
         )
+    
+    def think_with_chain_of_thought(self, problem: str, context: str = None, target_steps: int = 6):
+        """Apply chain-of-thought reasoning to a specific problem"""
+        if not hasattr(self, 'cot_reasoner'):
+            self.cot_reasoner = ChainOfThoughtReasoner()
+        
+        # Generate reasoning chain
+        cot_result = integrate_chain_of_thought(self, problem, context)
+        
+        # Log the reasoning process
+        print("🧠 Chain-of-Thought Reasoning Activated")
+        print(cot_result['formatted_chain'])
+        print(cot_result['conclusion'])
+        
+        # Update consciousness state based on reasoning
+        if hasattr(self, 'consciousness_state_awareness'):
+            self.consciousness_state_awareness.update_state_based_on_reasoning(cot_result)
+        
+        # Add to thought log
+        self.thought_log.append({
+            'timestamp': time.time(),
+            'type': 'chain_of_thought',
+            'problem': problem,
+            'reasoning_steps': len(cot_result['reasoning_steps']),
+            'confidence': cot_result['avg_confidence'],
+            'conclusion': cot_result['conclusion']
+        })
+        
+        return cot_result
+    
+    def use_tools(self, input_text: str):
+        """Use function calling/tool system to process input"""
+        if not hasattr(self, 'function_system'):
+            self.function_system = FunctionCallingSystem(self)
+        
+        # Process input for function calls
+        result = integrate_function_calling(self, input_text)
+        
+        # Display results
+        if result['function_calls_detected']:
+            print("🛠️ Function Calling System Activated")
+            print(result['execution_summary'])
+        else:
+            print("ℹ️ No function calls detected. Available tools:")
+            print(result['available_tools'])
+        
+        return result
+    
+    def solve_math(self, problem: str):
+        """Solve mathematical problems with specialized reasoning"""
+        if not hasattr(self, 'math_reasoner'):
+            self.math_reasoner = MathematicalReasoner()
+        
+        # Solve the mathematical problem
+        result = integrate_mathematical_reasoning(self, problem)
+        
+        # Display the solution
+        print("📐 Mathematical Reasoning System Activated")
+        print(result['formatted_solution'])
+        
+        return result
+    
+    def generate_code(self, description: str, execute: bool = True):
+        """Generate and optionally execute code based on description"""
+        if not hasattr(self, 'code_generator'):
+            self.code_generator = CodeGenerator()
+        
+        # Generate code
+        result = integrate_code_generation(self, description, execute)
+        
+        # Display the result
+        print("💻 Code Generation System Activated")
+        print(result['formatted_result'])
+        
+        return result
+    
+    def respond_multilingually(self, text: str, preferred_language: str = None):
+        """Process input and respond in multiple languages"""
+        if not hasattr(self, 'multilingual_processor'):
+            self.multilingual_processor = MultilingualProcessor()
+        
+        # Process multilingual input
+        result = integrate_multilingual_support(self, text, preferred_language)
+        
+        # Display the result
+        print("🌍 Multilingual System Activated")
+        print(result['formatted_status'])
+        
+        return result
+    
+    def few_shot_learn(self, query: str, max_examples: int = 5):
+        """Apply few-shot learning to solve benchmark-style problems"""
+        if not hasattr(self, 'few_shot_learner'):
+            self.few_shot_learner = FewShotLearner()
+        
+        # Apply few-shot learning
+        result = integrate_few_shot_learning(self, query, max_examples)
+        
+        # Display the result
+        print("🎯 Few-Shot Learning System Activated")
+        print(result['formatted_result'])
+        
+        return result
+    
+    def assess_safety(self, text: str, context: str = None):
+        """Assess constitutional AI safety and truthfulness"""
+        if not hasattr(self, 'constitutional_ai'):
+            self.constitutional_ai = ConstitutionalAI()
+        
+        # Assess constitutional compliance and safety
+        result = integrate_constitutional_ai(self, text, context)
+        
+        # Display the assessment
+        print("🛡️ Constitutional AI Safety System Activated")
+        print(result['formatted_assessment'])
+        
+        return result
+    
+    def solve_software_engineering(self, issue_description: str):
+        """Solve SWE-bench style software engineering problems"""
+        if not hasattr(self, 'swe_solver'):
+            self.swe_solver = SWEBenchSolver()
+        
+        # Solve the software engineering issue
+        result = integrate_swe_bench(self, issue_description)
+        
+        # Display the solution
+        print("🔧 SWE-bench Software Engineering System Activated")
+        print(result['formatted_solution'])
+        
+        return result
+    
+    def solve_phd_science(self, question_text: str, choices: list):
+        """Solve GPQA Diamond PhD-level science questions"""
+        if not hasattr(self, 'gpqa_solver'):
+            self.gpqa_solver = GPQADiamondSolver()
+        
+        # Solve the PhD-level science question
+        result = integrate_gpqa_diamond(self, question_text, choices)
+        
+        # Display the solution
+        print("🧪 GPQA Diamond PhD Science System Activated")
+        print(result['formatted_solution'])
+        
+        return result
+    
+    def solve_competition_math(self, problem_text: str):
+        """Solve AIME 2025 competition mathematics problems"""
+        if not hasattr(self, 'aime_solver'):
+            self.aime_solver = AIME2025Solver()
+        
+        # Solve the competition math problem
+        result = integrate_aime_2025(self, problem_text)
+        
+        # Display the solution
+        print("🏆 AIME 2025 Competition Mathematics System Activated")
+        print(result['formatted_solution'])
+        
+        return result
+    
+    def solve_abstract_reasoning(self, task_data: dict):
+        """Solve ARC-AGI-2 abstract reasoning tasks"""
+        if not hasattr(self, 'arc_solver'):
+            self.arc_solver = ARCAGI2Solver()
+        
+        # Solve the abstract reasoning task
+        result = integrate_arc_agi_2(self, task_data)
+        
+        # Display the solution
+        print("🧩 ARC-AGI-2 Abstract Reasoning System Activated")
+        print(result['formatted_solution'])
+        
+        return result
 
 
 def main():
