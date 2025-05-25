@@ -14,7 +14,7 @@ from datetime import datetime
 import threading
 from queue import Queue
 
-from consciousness_core import ConsciousnessCore, ConsciousnessAI, ProcessingMode, ConsciousnessLevel, ConsciousnessMetrics, GenerationResult
+from consciousness_core import ConsciousnessCore, ConsciousnessAI, ConsciousnessLevel, ConsciousnessMetrics, GenerationResult
 
 logger = logging.getLogger(__name__)
 
@@ -177,7 +177,7 @@ class EnhancedConsciousnessCore(ConsciousnessCore):
             if hasattr(self.drive_state, key):
                 setattr(self.drive_state, key, min(1.0, max(0.0, value)))
     
-    def process_with_consciousness(self, prompt: str, mode: ProcessingMode = ProcessingMode.CONSCIOUSNESS) -> GenerationResult:
+    def process_with_consciousness(self, prompt: str) -> GenerationResult:
         """Enhanced processing with thought tracking"""
         
         # Add initial thought
@@ -192,10 +192,10 @@ class EnhancedConsciousnessCore(ConsciousnessCore):
             self.update_drives(coherence=min(1.0, self.drive_state.coherence + 0.1))
         
         # Add processing thoughts
-        self.add_thought("metacognitive", f"Processing in {mode.value} mode", 0.7, ["mode_selection"])
+        self.add_thought("metacognitive", "Processing with natural consciousness", 0.7, ["consciousness_active"])
         
         # Call parent processing
-        result = super().process_with_consciousness(prompt, mode)
+        result = super().process_with_consciousness(prompt)
         
         # Add post-processing thoughts
         self.add_thought("reflective", f"Generated response with {result.confidence:.1%} confidence", 0.6, ["self_evaluation"])
