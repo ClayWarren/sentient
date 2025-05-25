@@ -15,6 +15,7 @@ import threading
 from queue import Queue
 
 from consciousness_core import ConsciousnessCore, ConsciousnessAI, ConsciousnessLevel, ConsciousnessMetrics, GenerationResult
+from search_engine import ConsciousnessSearchEngine
 
 logger = logging.getLogger(__name__)
 

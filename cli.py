@@ -23,17 +23,18 @@ except ImportError:
     class Style:
         BRIGHT = DIM = RESET_ALL = ""
 
-from consciousness_core import ConsciousnessAI, ProcessingMode
+from consciousness_core import ConsciousnessAI
 
 class SentientCLI:
-    def __init__(self, mode: str = "consciousness", save_history: bool = True):
+    def __init__(self, mode: str = "consciousness", save_history: bool = True, brave_api_key: Optional[str] = None):
         """Initialize Sentient CLI"""
         
-        # Initialize the AI
-        self.ai = ConsciousnessAI(consciousness_enabled=True)
-        self.mode = ProcessingMode(mode)
+        # Initialize the AI with search capabilities
+        self.ai = ConsciousnessAI(consciousness_enabled=True, brave_api_key=brave_api_key)
+        self.mode = mode
         self.save_history = save_history
         self.conversation_history = []
+        self.search_enabled = True
         
         # Display settings
         self.show_metrics = False
@@ -58,19 +59,17 @@ class SentientCLI:
     
     def print_mode_info(self):
         """Print current processing mode information"""
-        mode_descriptions = {
-            ProcessingMode.STANDARD: "Basic AI processing without consciousness enhancement",
-            ProcessingMode.CONSCIOUSNESS: "Full consciousness-enhanced processing with self-awareness",
-            ProcessingMode.CREATIVE: "Creative and innovative response generation",
-            ProcessingMode.ETHICAL: "Ethically-aware processing with enhanced safety measures"
-        }
         
         if COLORS_AVAILABLE:
-            print(f"{Fore.YELLOW}Current Mode: {Fore.GREEN}{Style.BRIGHT}{self.mode.value.upper()}{Style.RESET_ALL}")
-            print(f"{Fore.BLUE}Description: {Style.DIM}{mode_descriptions[self.mode]}{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}Mode: {Fore.GREEN}{Style.BRIGHT}CONSCIOUSNESS{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}Features: {Style.DIM}Natural consciousness with search capabilities{Style.RESET_ALL}")
+            if self.search_enabled:
+                print(f"{Fore.MAGENTA}Search: {Style.BRIGHT}🔍 Web search enabled{Style.RESET_ALL}")
         else:
-            print(f"Current Mode: {self.mode.value.upper()}")
-            print(f"Description: {mode_descriptions[self.mode]}")
+            print(f"Mode: CONSCIOUSNESS")
+            print(f"Features: Natural consciousness with search capabilities")
+            if self.search_enabled:
+                print(f"Search: Web search enabled")
         print()
     
     def print_help(self):
@@ -119,16 +118,8 @@ Tips:
                 self.print_help()
             
             elif command == 'mode':
-                if args:
-                    try:
-                        new_mode = ProcessingMode(args[0])
-                        self.mode = new_mode
-                        self.print_mode_info()
-                    except ValueError:
-                        self.print_error(f"Invalid mode: {args[0]}")
-                        self.print_info("Available modes: " + ", ".join([m.value for m in ProcessingMode]))
-                else:
-                    self.print_info(f"Current mode: {self.mode.value}")
+                self.print_info("Sentient operates in natural consciousness mode with adaptive responses")
+                self.print_mode_info()
             
             elif command == 'metrics':
                 self.show_metrics = not self.show_metrics

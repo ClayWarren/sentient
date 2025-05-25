@@ -553,6 +553,52 @@ def render_live_thought_ticker():
         
         st.markdown("</div></div></div>", unsafe_allow_html=True)
 
+def render_search_interface():
+    """Render search interface in sidebar"""
+    
+    # Quick search input
+    search_query = st.text_input("", placeholder="Search the web...", key="search_input")
+    
+    if st.button("🔍 Search", use_container_width=True):
+        if search_query:
+            with st.spinner("Searching..."):
+                consciousness_context = st.session_state.ai.get_consciousness_context("")
+                search_result = st.session_state.ai.consciousness.search_engine.search(search_query, consciousness_context)
+                
+                if 'error' not in search_result:
+                    st.session_state.last_search = search_result
+                    st.success(f"Found {len(search_result.get('results', []))} results")
+                else:
+                    st.error(f"Search error: {search_result['error']}")
+    
+    # Show recent search results
+    if hasattr(st.session_state, 'last_search') and st.session_state.last_search:
+        with st.expander("Recent Search Results", expanded=False):
+            search_data = st.session_state.last_search
+            
+            # Search metadata
+            if search_data.get('cached'):
+                st.info(f"🧠 From memory ({search_data.get('cache_age_hours', 0):.1f}h old)")
+            
+            st.write(f"**Query:** {search_data.get('query', '')}")
+            st.write(f"**Confidence:** {search_data.get('confidence', 0):.1%}")
+            
+            # Results
+            for i, result in enumerate(search_data.get('results', [])[:3], 1):
+                st.markdown(f"""
+                **{i}. {result['title']}**  
+                {result['snippet']}  
+                🔗 [Source]({result['url']}) | Relevance: {result['relevance']:.1%}
+                """)
+    
+    # Search statistics
+    if st.session_state.ai.consciousness_enabled:
+        search_stats = st.session_state.ai.consciousness.search_engine.get_search_statistics()
+        with st.expander("Search Memory", expanded=False):
+            st.metric("Total Searches", search_stats['total_searches'])
+            st.metric("Knowledge Topics", search_stats['knowledge_topics'])
+            st.metric("Recent (24h)", search_stats['recent_searches_24h'])
+
 def render_voice_controls():
     """Render voice mode controls"""
     st.markdown("""
@@ -1163,6 +1209,11 @@ def main():
         
         # Consciousness panel
         render_consciousness_panel()
+        
+        # Search section
+        st.divider()
+        st.subheader("🔍 Web Search")
+        render_search_interface()
         
         # File upload section
         st.divider()
