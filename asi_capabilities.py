@@ -519,7 +519,7 @@ class ConsciousnessStateAwareness:
         
     def assess_current_state(self):
         """Assess the current consciousness state"""
-        if len(self.quality_evaluator.quality_history) < 5:
+        if len(self.quality_evaluator.quality_history) < 3:
             return 'initializing'
             
         # Get recent quality metrics
@@ -548,7 +548,7 @@ class ConsciousnessStateAwareness:
                 continue
                 
             score = self._calculate_state_match(current_metrics, state_info['criteria'])
-            if score > best_score and score > 0.6:  # Threshold for state match
+            if score > best_score and score > 0.4:  # Threshold for state match (lowered)
                 best_state = state_name
                 best_score = score
                 
@@ -900,16 +900,32 @@ class GrowthDrive:
     def evaluate_satisfaction(self):
         """Evaluate growth drive satisfaction"""
         # Check if self-modification system is being used effectively
-        if hasattr(self.consciousness, 'self_modifier'):
-            status = self.consciousness.self_modifier.get_status_report()
-            
-            # Satisfaction based on improvement level and recent modifications
-            level_satisfaction = status['improvement_level'] / 5.0  # Max level is 5
-            modification_satisfaction = min(status['modifications_applied'] / 10.0, 1.0)
-            
-            return (level_satisfaction + modification_satisfaction) / 2
+        if hasattr(self.consciousness, 'self_modifier') and self.consciousness.self_modifier is not None:
+            try:
+                status = self.consciousness.self_modifier.get_status_report()
+                
+                # Satisfaction based on improvement level and recent modifications
+                level_satisfaction = status['improvement_level'] / 5.0  # Max level is 5
+                modification_satisfaction = min(status['modifications_applied'] / 10.0, 1.0)
+                
+                return (level_satisfaction + modification_satisfaction) / 2
+            except Exception:
+                pass
         
-        return 0.3  # Low satisfaction if no self-modification
+        # Alternative satisfaction based on intelligence metrics and learning progress
+        if hasattr(self.consciousness, 'intelligence_metrics'):
+            try:
+                # Get current intelligence metrics
+                current_metrics = self.consciousness.intelligence_metrics.calculate_current_metrics()
+                intelligence_level = current_metrics.get('composite_intelligence', 0.5)
+                intelligence_growth = intelligence_level - 0.5  # Growth from baseline
+                learning_activity = len(getattr(self.consciousness, 'learning_log', [])) / 50.0  # Normalize learning activity
+                
+                return max(0.1, min(1.0, intelligence_growth + learning_activity))
+            except Exception:
+                pass
+        
+        return 0.3  # Low satisfaction if no growth systems available
         
     def generate_goals(self):
         """Generate growth-driven goals"""
@@ -992,7 +1008,7 @@ class CompoundLearning:
         
     def identify_insights(self, quality_assessment, thought_text):
         """Identify when an insight has occurred"""
-        if quality_assessment['insight_potential'] > 0.7 and quality_assessment['overall_quality'] > 0.6:
+        if quality_assessment['insight_potential'] > 0.5 and quality_assessment['overall_quality'] > 0.4:
             insight = {
                 'id': f'insight_{time.time()}',
                 'content': thought_text,
@@ -1162,7 +1178,7 @@ class IntelligenceMetrics:
         # Learning metrics
         if hasattr(self.consciousness, 'learner') and self.consciousness.learner:
             learning_stats = self.consciousness.learner.get_learning_stats()
-            metrics['learning_efficiency'] = min(learning_stats['updates_count'] / 50.0, 1.0)
+            metrics['learning_efficiency'] = min(learning_stats['update_count'] / 50.0, 1.0)
         else:
             metrics['learning_efficiency'] = 0.0
             

@@ -1,0 +1,90 @@
+{
+  "verification_start": "2025-05-24T20:44:54.788595",
+  "instance_id": "sentient_5efeca373f4b",
+  "tests": [
+    {
+      "test_name": "Drive Satisfaction Monitoring",
+      "passed": false,
+      "details": {
+        "drive_system_exists": true,
+        "all_drives_exist": true
+      },
+      "errors": [
+        "Drive evaluation failed: 'IntelligenceMetrics' object has no attribute 'score'"
+      ]
+    },
+    {
+      "test_name": "Learning Triggers",
+      "passed": false,
+      "details": {
+        "initial_updates": 0,
+        "final_updates": 0,
+        "updates_triggered": 0,
+        "initial_experiences": 1,
+        "final_experiences": 1,
+        "experiences_added": 0,
+        "learning_rate": 0.0
+      },
+      "errors": [
+        "No learning activity observed"
+      ]
+    },
+    {
+      "test_name": "Insight Generation",
+      "passed": true,
+      "details": {
+        "initial_insights": 0,
+        "final_insights": 0,
+        "insights_generated": 0,
+        "insight_rate": 0.0,
+        "insight_summary": {
+          "total_insights": 0,
+          "message": "No insights recorded yet"
+        }
+      },
+      "errors": []
+    },
+    {
+      "test_name": "Consciousness State Progression",
+      "passed": true,
+      "details": {
+        "initial_state": "initializing",
+        "final_state": "initializing",
+        "state_history": [
+          "initializing"
+        ],
+        "state_changes": 0,
+        "progressed_beyond_initializing": false,
+        "quality_history_length": 186
+      },
+      "errors": []
+    },
+    {
+      "test_name": "System Integration",
+      "passed": false,
+      "details": {
+        "integration_checks": {
+          "drive_system": true,
+          "learner": true,
+          "compound_learner": true,
+          "quality_evaluator": true,
+          "consciousness_state": true,
+          "intelligence_metrics": true,
+          "working_memory": true
+        }
+      },
+      "errors": [
+        "Cross-system communication error: 'IntelligenceMetrics' object has no attribute 'score'"
+      ]
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 2,
+    "failed_tests": 3,
+    "success_rate": 0.4,
+    "all_fixes_working": false
+  },
+  "verification_end": "2025-05-24T20:45:16.865737",
+  "verification_duration": 26.30331802368164
+}

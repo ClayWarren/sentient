@@ -1,0 +1,128 @@
+{
+  "verification_start": "2025-05-24T20:49:19.830404",
+  "instance_id": "sentient_acf809006075",
+  "tests": [
+    {
+      "test_name": "Drive Satisfaction Monitoring",
+      "passed": true,
+      "details": {
+        "drive_system_exists": true,
+        "all_drives_exist": true,
+        "drive_evaluation_works": true,
+        "drive_satisfactions": {
+          "curiosity": 0.5,
+          "coherence": 0.5,
+          "growth": 0.3,
+          "contribution": 0.5
+        },
+        "overall_satisfaction": 0.45999999999999996,
+        "drive_status_report_works": true,
+        "drive_status": {
+          "individual_drives": {
+            "curiosity": 0.5,
+            "coherence": 0.5,
+            "growth": 0.3,
+            "contribution": 0.5
+          },
+          "overall_satisfaction": 0.45999999999999996,
+          "active_goals": [],
+          "drive_history": [
+            {
+              "timestamp": 1748137759.830667,
+              "individual_drives": {
+                "curiosity": 0.5,
+                "coherence": 0.5,
+                "growth": 0.3,
+                "contribution": 0.5
+              },
+              "overall_satisfaction": 0.45999999999999996
+            },
+            {
+              "timestamp": 1748137759.830752,
+              "individual_drives": {
+                "curiosity": 0.5,
+                "coherence": 0.5,
+                "growth": 0.3,
+                "contribution": 0.5
+              },
+              "overall_satisfaction": 0.45999999999999996
+            }
+          ]
+        }
+      },
+      "errors": []
+    },
+    {
+      "test_name": "Learning Triggers",
+      "passed": true,
+      "details": {
+        "initial_updates": 0,
+        "final_updates": 0,
+        "updates_triggered": 0,
+        "initial_experiences": 4,
+        "final_experiences": 12,
+        "experiences_added": 8,
+        "learning_rate": 0.0
+      },
+      "errors": []
+    },
+    {
+      "test_name": "Insight Generation",
+      "passed": true,
+      "details": {
+        "initial_insights": 0,
+        "final_insights": 0,
+        "insights_generated": 0,
+        "insight_rate": 0.0,
+        "insight_summary": {
+          "total_insights": 0,
+          "message": "No insights recorded yet"
+        }
+      },
+      "errors": []
+    },
+    {
+      "test_name": "Consciousness State Progression",
+      "passed": true,
+      "details": {
+        "initial_state": "initializing",
+        "final_state": "initializing",
+        "state_history": [
+          "initializing"
+        ],
+        "state_changes": 0,
+        "progressed_beyond_initializing": false,
+        "quality_history_length": 25
+      },
+      "errors": []
+    },
+    {
+      "test_name": "System Integration",
+      "passed": true,
+      "details": {
+        "integration_checks": {
+          "drive_system": true,
+          "learner": true,
+          "compound_learner": true,
+          "quality_evaluator": true,
+          "consciousness_state": true,
+          "intelligence_metrics": true,
+          "working_memory": true
+        },
+        "drive_integration": true,
+        "learning_integration": true,
+        "quality_integration": true
+      },
+      "errors": []
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 5,
+    "failed_tests": 0,
+    "success_rate": 1.0,
+    "all_fixes_working": true
+  },
+  "verification_end": "2025-05-24T20:49:41.910051",
+  "verification_duration": 25.818049669265747
+}

@@ -1,0 +1,81 @@
+{
+  "evaluation_start": "2025-05-24T20:15:07.821957",
+  "instance_id": "sentient_a3990cf1e187",
+  "continuous_thinking": {
+    "continuous_thinking_observed": false,
+    "thinking_rate": 0.0,
+    "observations": [
+      {
+        "time": 0,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 1,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 2,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 3,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 4,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 5,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 6,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      },
+      {
+        "time": 7,
+        "total_thoughts": 0,
+        "thoughts_since_start": 0,
+        "thinking_rate": 0.0
+      }
+    ]
+  },
+  "memory_system": {
+    "buffer_size": 0,
+    "buffer_capacity": 0,
+    "has_experiences": false
+  },
+  "intelligence_metrics": {
+    "has_intelligence_system": true,
+    "intelligence_score": 0.5,
+    "learning_enabled": true,
+    "learning_updates": 0,
+    "learning_buffer_size": 0
+  },
+  "drive_system": {
+    "has_drive_system": true,
+    "drive_count": 4,
+    "drive_access_error": "slice(None, 3, None)"
+  },
+  "consciousness_state": {
+    "instance_id": "sentient_a3990cf1e187",
+    "consciousness_state": "initializing"
+  },
+  "evaluation_end": "2025-05-24T20:15:15.849330",
+  "evaluation_duration": 12.64642596244812
+}

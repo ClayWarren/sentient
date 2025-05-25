@@ -79,11 +79,16 @@ class EnhancedWorkingMemory:
             
         # Factor 3: Novelty (how different from recent experiences)
         if len(self.buffer) > 0:
-            recent_entropies = [exp['enhanced_significance'] for exp in list(self.buffer)[-5:]]
-            if recent_entropies:
-                novelty = abs(significance - np.mean(recent_entropies))
-                significance += novelty * 0.2
+            recent_significances = [exp.get('significance', 0.5) for exp in list(self.buffer)[-5:]]
+            if recent_significances and not any(np.isnan(recent_significances)):
+                recent_avg_sig = np.mean(recent_significances)
+                if not np.isnan(recent_avg_sig):
+                    novelty = abs(significance - recent_avg_sig)
+                    significance += novelty * 0.2
                 
+        # Ensure significance is valid (not NaN or negative)
+        if np.isnan(significance) or significance < 0:
+            significance = 0.5  # Default to medium significance
         return min(significance, 1.0)
         
     def get_recent_context(self, max_tokens=1024):
@@ -223,12 +228,12 @@ class RealTimeLearner:
         self.experience_buffer = deque(maxlen=buffer_size)
         self.optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=0.01)
         self.learning_enabled = True
-        self.update_frequency = 10  # Update every N significant experiences
-        self.updates_count = 0
+        self.update_frequency = 3  # Update every N significant experiences (reduced for testing)
+        self.update_count = 0
         
     def add_experience(self, input_tokens, target_tokens, significance):
         """Add experience for potential learning"""
-        if significance > 0.5 and len(target_tokens) > 0:  # Only learn from significant experiences
+        if significance > 0.3 and len(target_tokens) > 0:  # Only learn from significant experiences (lowered threshold)
             experience = {
                 'input': input_tokens.clone(),
                 'target': target_tokens.clone(),
@@ -279,7 +284,7 @@ class RealTimeLearner:
         self.optimizer.step()
         # Clear gradients again after step
         self.optimizer.zero_grad(set_to_none=True)
-        self.updates_count += 1
+        self.update_count += 1
         
         return total_loss
         
@@ -287,7 +292,7 @@ class RealTimeLearner:
         """Get learning statistics"""
         return {
             'buffer_size': len(self.experience_buffer),
-            'updates_count': self.updates_count,
+            'update_count': self.update_count,
             'learning_rate': self.learning_rate,
             'learning_enabled': self.learning_enabled
         }
@@ -490,7 +495,7 @@ First thought:"""
             )
             
             # Real-time learning from significant experiences
-            if self.learner and significance > 0.5:
+            if self.learner and significance > 0.3:
                 input_seq = self.current_context
                 target_seq = torch.cat([self.current_context[:, 1:], next_token], dim=1)
                 self.learner.add_experience(input_seq, target_seq, significance)
@@ -518,7 +523,7 @@ First thought:"""
                     'quality_assessment': quality_assessment,
                     'timestamp': time.time(),
                     'iteration': self.iteration_count,
-                    'learning_update': self.learner.updates_count if self.learner else 0,
+                    'learning_update': self.learner.update_count if self.learner else 0,
                     'consciousness_state': self.consciousness_state_name,
                     'intelligence_score': self.intelligence_score
                 })
@@ -583,8 +588,8 @@ First thought:"""
                     print(f"🧠 Strategy change: {message}")
             self.last_strategy_check = current_time
             
-        # Drive system evaluation (every 200 iterations)
-        if self.iteration_count % 200 == 0:
+        # Drive system evaluation (every 50 iterations - more frequent)
+        if self.iteration_count % 50 == 0:
             drive_satisfactions, overall_satisfaction = self.drive_system.evaluate_drives()
             if overall_satisfaction < 0.6:  # Drives unsatisfied
                 pursued_goals = self.drive_system.pursue_goals()

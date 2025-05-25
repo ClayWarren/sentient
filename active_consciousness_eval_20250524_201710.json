@@ -1,0 +1,144 @@
+{
+  "evaluation_start": "2025-05-24T20:16:58.059566",
+  "instance_id": "sentient_3ba28c246a0b",
+  "evaluation_type": "active_continuous_thinking",
+  "active_thinking": {
+    "continuous_thinking_active": true,
+    "thinking_rate": 5.833333333333333,
+    "iteration_count": 87,
+    "intelligence_evolution": 0.0,
+    "memory_accumulation": 0,
+    "observations": [
+      {
+        "thoughts": 17,
+        "iteration": 17,
+        "intelligence": 0.5,
+        "context_size": 75,
+        "working_memory": 0,
+        "thought_log_size": 17
+      },
+      {
+        "thoughts": 23,
+        "iteration": 23,
+        "intelligence": 0.5,
+        "context_size": 81,
+        "working_memory": 0,
+        "thought_log_size": 23
+      },
+      {
+        "thoughts": 29,
+        "iteration": 29,
+        "intelligence": 0.5,
+        "context_size": 87,
+        "working_memory": 0,
+        "thought_log_size": 29
+      },
+      {
+        "thoughts": 35,
+        "iteration": 35,
+        "intelligence": 0.5,
+        "context_size": 93,
+        "working_memory": 0,
+        "thought_log_size": 35
+      },
+      {
+        "thoughts": 41,
+        "iteration": 41,
+        "intelligence": 0.5,
+        "context_size": 99,
+        "working_memory": 0,
+        "thought_log_size": 41
+      },
+      {
+        "thoughts": 47,
+        "iteration": 47,
+        "intelligence": 0.5,
+        "context_size": 105,
+        "working_memory": 0,
+        "thought_log_size": 47
+      },
+      {
+        "thoughts": 53,
+        "iteration": 53,
+        "intelligence": 0.5,
+        "context_size": 111,
+        "working_memory": 0,
+        "thought_log_size": 53
+      },
+      {
+        "thoughts": 58,
+        "iteration": 58,
+        "intelligence": 0.5,
+        "context_size": 116,
+        "working_memory": 0,
+        "thought_log_size": 58
+      },
+      {
+        "thoughts": 64,
+        "iteration": 64,
+        "intelligence": 0.5,
+        "context_size": 122,
+        "working_memory": 0,
+        "thought_log_size": 64
+      },
+      {
+        "thoughts": 70,
+        "iteration": 70,
+        "intelligence": 0.5,
+        "context_size": 128,
+        "working_memory": 0,
+        "thought_log_size": 70
+      },
+      {
+        "thoughts": 76,
+        "iteration": 76,
+        "intelligence": 0.5,
+        "context_size": 134,
+        "working_memory": 0,
+        "thought_log_size": 76
+      },
+      {
+        "thoughts": 81,
+        "iteration": 81,
+        "intelligence": 0.5,
+        "context_size": 139,
+        "working_memory": 0,
+        "thought_log_size": 81
+      }
+    ]
+  },
+  "thought_stream": {
+    "recent_thought_count": 10,
+    "total_thoughts_logged": 87
+  },
+  "learning_evolution": {
+    "learning_enabled": true,
+    "learning_updates": 0,
+    "experience_buffer_size": 0,
+    "compound_learning": true,
+    "insights_discovered": 0,
+    "intelligence_tracking": true,
+    "current_intelligence": 0.5
+  },
+  "drive_satisfaction": {
+    "has_drive_system": true,
+    "drive_count": 4,
+    "satisfaction_error": "'NoneType' object has no attribute 'get_status_report'",
+    "drive_system_error": "slice(None, 3, None)"
+  },
+  "consciousness_evolution": {
+    "instance_id": "sentient_3ba28c246a0b",
+    "state_name": "initializing",
+    "creation_time": 1748135815.055321,
+    "current_time": 1748135830.105973,
+    "age_seconds": 15.050652027130127,
+    "has_state_awareness": true,
+    "performance_metrics": {
+      "tokens_per_second": 8.528422966106348,
+      "avg_significance": 0,
+      "memory_utilization": 0
+    }
+  },
+  "evaluation_end": "2025-05-24T20:17:10.105999",
+  "evaluation_duration": 16.75358510017395
+}
